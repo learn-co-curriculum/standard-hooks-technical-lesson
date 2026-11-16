@@ -1,13 +1,17 @@
-import React from "react";
-import "./App.css"; // Import global styles
-import ProfileForm from "./components/ProfileForm"; // Import ProfileForm
-import ThemeToggle from "./components/ThemeToggle"; // Import ThemeToggle
-
-// TODO: When useContext is implemented, apply the theme dynamically to this container
+import { useContext } from "react";
+import "./App.css";
+import ProfileForm from "./components/ProfileForm";
+import ThemeToggle from "./components/ThemeToggle";
+import { ThemeContext } from "./context/ThemeContext";
 
 function App() {
+  // useContext reads the current theme value from the global ThemeContext.
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="app-container">
+    // Conditionally apply the "dark" CSS class based on the current theme so
+    // styles in App.css can style light/dark mode.
+    <div className={`app-container ${theme === "dark" ? "dark" : ""}`}>
       <h1>Standard Hooks in React</h1>
       <ProfileForm />
       <ThemeToggle />
